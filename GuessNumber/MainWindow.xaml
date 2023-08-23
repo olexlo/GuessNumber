@@ -11,14 +11,14 @@
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="387*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="RangeTen" Grid.Column="1" Content="0 - 10" HorizontalAlignment="Left" Margin="0,20,0,0" VerticalAlignment="Top" Width="66"/>
-        <Button x:Name="RangeHundred" Grid.Column="1" Content="0 - 100" HorizontalAlignment="Left" Margin="0,45,0,0" VerticalAlignment="Top" Width="66"/>
-        <Button x:Name="RangeThousand" Grid.Column="1" Content="0 - 1000" HorizontalAlignment="Left" Margin="0,70,0,0" VerticalAlignment="Top" Width="66"/>
-        <Button x:Name="BeginToPlay" Grid.Column="1" Content="ГРАТИ" HorizontalAlignment="Left" Margin="71,20,0,0" VerticalAlignment="Top" Height="70" Width="77"/>
+        <Button x:Name="RangeTen" Grid.Column="1" Content="0 - 10" HorizontalAlignment="Left" Margin="0,20,0,0" VerticalAlignment="Top" Width="66" Click="RangeTen_Click"/>
+        <Button x:Name="RangeHundred" Grid.Column="1" Content="0 - 100" HorizontalAlignment="Left" Margin="0,45,0,0" VerticalAlignment="Top" Width="66" Click="RangeHundred_Click"/>
+        <Button x:Name="RangeThousand" Grid.Column="1" Content="0 - 1000" HorizontalAlignment="Left" Margin="0,70,0,0" VerticalAlignment="Top" Width="66" Click="RangeThousand_Click"/>
+        <Button x:Name="BeginToPlay" Grid.Column="1" Content="ГРАТИ" HorizontalAlignment="Left" Margin="71,20,0,0" VerticalAlignment="Top" Height="70" Width="77" Click="BeginToPlay_Click"/>
         <TextBlock x:Name="PlayingField" Grid.Column="1" HorizontalAlignment="Left" Margin="153,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="234"/>
         <Label x:Name="InformationTable" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="32" Margin="153,20,0,0" VerticalAlignment="Top" Width="234"/>
-        <Button x:Name="ClickAndGuess" Grid.Column="1" Content="Вгадати" HorizontalAlignment="Left" Height="70" Margin="394,20,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button x:Name="AccidentallyCrop" Grid.Column="1" Content="Звузити поле пошуку" HorizontalAlignment="Left" Margin="0,128,0,0" VerticalAlignment="Top" Width="148" Height="29"/>
+        <Button x:Name="ClickAndGuess" Grid.Column="1" Content="Вгадати" HorizontalAlignment="Left" Height="70" Margin="394,20,0,0" VerticalAlignment="Top" Width="70" Click="ClickAndGuess_Click"/>
+        <Button x:Name="AccidentallyCrop" Grid.Column="1" Content="Звузити поле пошуку" HorizontalAlignment="Left" Margin="0,128,0,0" VerticalAlignment="Top" Width="148" Height="29" Click="AccidentallyCrop_Click"/>
         <Button x:Name="PrimeNumber" Grid.Column="1" Content="Просте число" HorizontalAlignment="Left" Height="25" Margin="0,192,0,0" VerticalAlignment="Top" Width="148"/>
         <Label Grid.Column="1" Content="" HorizontalAlignment="Left" Height="33" Margin="0,95,0,0" VerticalAlignment="Top" Width="148"/>
         <Label Grid.Column="1" Content="" HorizontalAlignment="Left" Height="30" Margin="0,162,0,0" VerticalAlignment="Top" Width="148"/>
