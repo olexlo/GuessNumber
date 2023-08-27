@@ -23,10 +23,11 @@ namespace GuessNumber
     
     public partial class MainWindow : Window
     {
-        public int limitNum = 0, upperNum = 0, lowerNum = 1000;
-        public int hiddenNum = 0, treasure = 0, numOfBenefits = 0;
+        public int limitNum = 0, upperNum = 0, lowerNum = 1000, idNum = 0;
+        public int hiddenNum = 0, treasure = 0, numOfBenefits = 0, stepCountNum = 0;
         public bool start_end = false, isPrime = false, isDivisibleByThree = false;
         Random rdm = new Random();
+        ServObj.ServiceNumber rezultGames = new ServObj.ServiceNumber();
         
         public MainWindow()
         {
@@ -49,6 +50,20 @@ namespace GuessNumber
             PlayingField.MaxLength = 2;
         }
 
+        private void DifficultyRecordTable_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceNumber serviceNumber2 = new ServiceNumber(ServiceNumber.SortBy.limitNum);
+            ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+            ListOfRecords.Content += serviceNumber2.PrintAllRezultGame();
+        }
+
+        private void HintsRecordsTable_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceNumber serviceNumber1 = new ServiceNumber(ServiceNumber.SortBy.stepCountNum);
+            ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+            ListOfRecords.Content += serviceNumber1.PrintAllRezultGame();
+        }
+
         private void BiggerSmaller_Click(object sender, RoutedEventArgs e)
         {
             if (int.Parse(PlayingField.Text) > hiddenNum) 
@@ -64,6 +79,7 @@ namespace GuessNumber
                 LabelBiggerSmaller.Content = "Вгадал";
             }
             BiggerSmaller.IsEnabled = false;
+            numOfBenefits++;
         }
 
         private void MultipleOfThree_Click(object sender, RoutedEventArgs e)
@@ -77,6 +93,7 @@ namespace GuessNumber
                 LabelMultipleOfThree.Content = "Число не кратне трьом";
             }
             MultipleOfThree.IsEnabled = false;
+            numOfBenefits++;
         }
 
         private void PrimeNumber_Click(object sender, RoutedEventArgs e)
@@ -90,6 +107,7 @@ namespace GuessNumber
                 LabelPrimeNumber.Content = "Це складове число";
             }
             PrimeNumber.IsEnabled = false;
+            numOfBenefits++;
         }
 
         private void RangeThousand_Click(object sender, RoutedEventArgs e)
@@ -117,6 +135,8 @@ namespace GuessNumber
                 isPrime = mn.IsPrime(mn.HiddenNum);
                 isDivisibleByThree = mn.IsDivisibleByThree();
                 InformationTable.Content = "Гра почалася! Вгадай число в диапазоне від 0 до " + limitNum.ToString() + ".";
+                ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+                BeginToPlay.Content = "Здатися";
                 RangeTen.IsEnabled = false;
                 RangeHundred.IsEnabled = false;
                 RangeThousand.IsEnabled = false;
@@ -125,6 +145,8 @@ namespace GuessNumber
             else 
             {
                 InformationTable.Content = "Ви здалися. Загадане число це => " + hiddenNum.ToString();
+                ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+                BeginToPlay.Content = "Грати";
                 PlayingField.Text = "0";
                 RangeTen.IsEnabled = true;
                 RangeHundred.IsEnabled = true;
@@ -135,6 +157,7 @@ namespace GuessNumber
                 AccidentallyCrop.IsEnabled = false;
                 PrimeNumber.IsEnabled = false;
                 MultipleOfThree.IsEnabled = false;
+                numOfBenefits = 0;
             }
             switch (limitNum)
             {
@@ -162,10 +185,20 @@ namespace GuessNumber
             if (treasure == hiddenNum) 
             {
                 InformationTable.Content = " ПЕРЕМОГА. Загадане число це => " + hiddenNum.ToString();
+                FieldOfHistory.Content = $"{treasure} ПЕРЕМОГА.";
+                start_end = false;
+                idNum++;
+                RangeNumber victory = new RangeNumber(idNum,hiddenNum,limitNum,stepCountNum,numOfBenefits);
+                rezultGames.AddRezult(victory);
+                ListOfRecords.Content += rezultGames.PrintOnRezultGame(victory);
+                DifficultyRecordTable.IsEnabled = true;
+                HintsRecordsTable.IsEnabled = true;
             }
             else 
             {
                 InformationTable.Content = " НЕВДАЧА. Спробуй ще раз";
+                FieldOfHistory.Content = $"{treasure} НЕВДАЧА.";
+                stepCountNum++;
             }
             PlayingField.Text = "";
         }
@@ -176,6 +209,7 @@ namespace GuessNumber
             lowerNum = rdm.Next(1, hiddenNum-10);
             AccidentallyCrop.IsEnabled = false;
             LabelAccidentallyCrop.Content = $"від {lowerNum.ToString()} до {upperNum.ToString()}";
+            numOfBenefits++;
         }
 
     }
