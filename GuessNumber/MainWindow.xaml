@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GuessNumber"
         mc:Ignorable="d"
         Title="ГРАЙ &quot;Вгадай число&quot;" Height="400" Width="750" ResizeMode="NoResize" >
-    <Grid>
+    <Grid Width="750" Margin="0,0,0,-6" Height="400">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="387*"/>

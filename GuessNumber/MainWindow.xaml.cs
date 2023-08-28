@@ -53,14 +53,14 @@ namespace GuessNumber
         private void DifficultyRecordTable_Click(object sender, RoutedEventArgs e)
         {
             ServiceNumber serviceNumber2 = new ServiceNumber(ServiceNumber.SortBy.limitNum);
-            ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+            ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
             ListOfRecords.Content += serviceNumber2.PrintAllRezultGame();
         }
 
         private void HintsRecordsTable_Click(object sender, RoutedEventArgs e)
         {
             ServiceNumber serviceNumber1 = new ServiceNumber(ServiceNumber.SortBy.stepCountNum);
-            ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+            ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
             ListOfRecords.Content += serviceNumber1.PrintAllRezultGame();
         }
 
@@ -68,11 +68,11 @@ namespace GuessNumber
         {
             if (int.Parse(PlayingField.Text) > hiddenNum) 
             {
-                LabelBiggerSmaller.Content = "Більше";
+                LabelBiggerSmaller.Content = "Меньше";
             }
             if (int.Parse(PlayingField.Text) < hiddenNum)
             {
-                LabelBiggerSmaller.Content = "Меньше";
+                LabelBiggerSmaller.Content = "Більше";
             }
             if (int.Parse(PlayingField.Text) == hiddenNum)
             {
@@ -135,8 +135,9 @@ namespace GuessNumber
                 isPrime = mn.IsPrime(mn.HiddenNum);
                 isDivisibleByThree = mn.IsDivisibleByThree();
                 InformationTable.Content = "Гра почалася! Вгадай число в диапазоне від 0 до " + limitNum.ToString() + ".";
-                ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+                ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
                 BeginToPlay.Content = "Здатися";
+                FieldOfHistory.Content = "";
                 RangeTen.IsEnabled = false;
                 RangeHundred.IsEnabled = false;
                 RangeThousand.IsEnabled = false;
@@ -145,7 +146,7 @@ namespace GuessNumber
             else 
             {
                 InformationTable.Content = "Ви здалися. Загадане число це => " + hiddenNum.ToString();
-                ListOfRecords.Content = "ID \t Діапазон \t Шукане \t Спроб \t Допомоги \n";
+                ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
                 BeginToPlay.Content = "Грати";
                 PlayingField.Text = "0";
                 RangeTen.IsEnabled = true;
@@ -185,7 +186,11 @@ namespace GuessNumber
             if (treasure == hiddenNum) 
             {
                 InformationTable.Content = " ПЕРЕМОГА. Загадане число це => " + hiddenNum.ToString();
-                FieldOfHistory.Content = $"{treasure} ПЕРЕМОГА.";
+                FieldOfHistory.Content += $"{treasure} ПЕРЕМОГА. \n";
+                BeginToPlay.Content = "Грати";
+                RangeTen.IsEnabled = true;
+                RangeHundred.IsEnabled = true;
+                RangeThousand.IsEnabled = true;
                 start_end = false;
                 idNum++;
                 RangeNumber victory = new RangeNumber(idNum,hiddenNum,limitNum,stepCountNum,numOfBenefits);
@@ -197,7 +202,7 @@ namespace GuessNumber
             else 
             {
                 InformationTable.Content = " НЕВДАЧА. Спробуй ще раз";
-                FieldOfHistory.Content = $"{treasure} НЕВДАЧА.";
+                FieldOfHistory.Content += $"{treasure} НЕВДАЧА. \n";
                 stepCountNum++;
             }
             PlayingField.Text = "";
