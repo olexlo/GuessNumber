@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GuessNumber.ModObj;
 using GuessNumber.ServObj;
+using static GuessNumber.ServObj.ServiceNumber;
 
 namespace GuessNumber
 {
@@ -24,14 +25,15 @@ namespace GuessNumber
     public partial class MainWindow : Window
     {
         public int limitNum = 0, upperNum = 0, lowerNum = 1000, idNum = 0;
-        public int hiddenNum = 0, treasure = 0, numOfBenefits = 0, stepCountNum = 0;
-        public bool start_end = false, isPrime = false, isDivisibleByThree = false;
+        public int hiddenNum = 0, treasure = 0, numOfBenefits = 0, stepCountNum = 1;
+        public bool start_end = false, isPrime = false, isDivisibleByThree = false, flNumRecord = false;
         Random rdm = new Random();
-        ServObj.ServiceNumber rezultGames = new ServObj.ServiceNumber();
+        ServiceNumber rezultGames = new ServiceNumber();
         
         public MainWindow()
         {
             InitializeComponent();
+            ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
             InformationTable.Content = " Виберіть рівень (діапазон) ";
 
         }
@@ -52,16 +54,18 @@ namespace GuessNumber
 
         private void DifficultyRecordTable_Click(object sender, RoutedEventArgs e)
         {
-            ServiceNumber serviceNumber2 = new ServiceNumber(ServiceNumber.SortBy.limitNum);
+            rezultGames.SortNum(SortBy.limitNum);
             ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
-            ListOfRecords.Content += serviceNumber2.PrintAllRezultGame();
+            ListOfRecords.Content += rezultGames.PrintAllRezultGame();
+            flNumRecord = true;
         }
 
         private void HintsRecordsTable_Click(object sender, RoutedEventArgs e)
         {
-            ServiceNumber serviceNumber1 = new ServiceNumber(ServiceNumber.SortBy.stepCountNum);
+            rezultGames.SortNum(SortBy.stepCountNum);
             ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
-            ListOfRecords.Content += serviceNumber1.PrintAllRezultGame();
+            ListOfRecords.Content += rezultGames.PrintAllRezultGame();
+            flNumRecord = true;
         }
 
         private void BiggerSmaller_Click(object sender, RoutedEventArgs e)
@@ -130,35 +134,37 @@ namespace GuessNumber
             start_end = !start_end;
             if (start_end) 
             {
-                hiddenNum = rdm.Next(limitNum);
+                hiddenNum = rdm.Next(0,limitNum);
                 ModelNumber mn = new ModelNumber(hiddenNum);
                 isPrime = mn.IsPrime(mn.HiddenNum);
                 isDivisibleByThree = mn.IsDivisibleByThree();
-                InformationTable.Content = "Гра почалася! Вгадай число в диапазоне від 0 до " + limitNum.ToString() + ".";
-                ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
+                InformationTable.Content = "Вгадай число в диапазоне від 0 до " + limitNum.ToString() + ".";
+                if (flNumRecord) ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
                 BeginToPlay.Content = "Здатися";
                 FieldOfHistory.Content = "";
                 RangeTen.IsEnabled = false;
                 RangeHundred.IsEnabled = false;
                 RangeThousand.IsEnabled = false;
                 ClickAndGuess.IsEnabled = true;
+                flNumRecord = false;
+                stepCountNum = 1;
+                numOfBenefits = 0;
             }
             else 
             {
                 InformationTable.Content = "Ви здалися. Загадане число це => " + hiddenNum.ToString();
-                ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
+                //ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
                 BeginToPlay.Content = "Грати";
+                BeginToPlay.IsEnabled = false;
+                ClickAndGuess.IsEnabled = false;
                 PlayingField.Text = "0";
                 RangeTen.IsEnabled = true;
                 RangeHundred.IsEnabled = true;
                 RangeThousand.IsEnabled = true;
-                ClickAndGuess.IsEnabled = false;
-                BeginToPlay.IsEnabled = false;
                 BiggerSmaller.IsEnabled = false;
                 AccidentallyCrop.IsEnabled = false;
                 PrimeNumber.IsEnabled = false;
                 MultipleOfThree.IsEnabled = false;
-                numOfBenefits = 0;
             }
             switch (limitNum)
             {
@@ -188,9 +194,15 @@ namespace GuessNumber
                 InformationTable.Content = " ПЕРЕМОГА. Загадане число це => " + hiddenNum.ToString();
                 FieldOfHistory.Content += $"{treasure} ПЕРЕМОГА. \n";
                 BeginToPlay.Content = "Грати";
+                BeginToPlay.IsEnabled = false;
+                ClickAndGuess.IsEnabled = false;
                 RangeTen.IsEnabled = true;
                 RangeHundred.IsEnabled = true;
                 RangeThousand.IsEnabled = true;
+                BiggerSmaller.IsEnabled = false;
+                AccidentallyCrop.IsEnabled = false;
+                PrimeNumber.IsEnabled = false;
+                MultipleOfThree.IsEnabled = false;
                 start_end = false;
                 idNum++;
                 RangeNumber victory = new RangeNumber(idNum,hiddenNum,limitNum,stepCountNum,numOfBenefits);

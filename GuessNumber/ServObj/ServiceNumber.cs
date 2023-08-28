@@ -41,11 +41,11 @@ namespace GuessNumber.ServObj
             }
             return result;
         }
-        public ServiceNumber(SortBy sortBy) : this() 
+        public void SortNum(SortBy sortBy)
         {
-            if (rezultGame != null && rezultGame.Count > 0) 
+            if (rezultGame != null && rezultGame.Count > 0)
             {
-                switch (sortBy) 
+                switch (sortBy)
                 {
                     case SortBy.stepCountNum:
                         rezultGame.Sort((x, y) => y.StepСountNum.CompareTo(x.StepСountNum));
