@@ -41,18 +41,36 @@ namespace GuessNumber.ServObj
             }
             return result;
         }
+        //public void SortNum(SortBy sortBy)
+        //{
+        //    if (rezultGame != null && rezultGame.Count > 0)
+        //    {
+        //        switch (sortBy)
+        //        {
+        //            case SortBy.stepCountNum:
+        //                rezultGame.Sort((x, y) => y.StepСountNum.CompareTo(x.StepСountNum));
+        //                break;
+        //            case SortBy.limitNum:
+        //                rezultGame.Sort((x, y) => y.LimitNum.CompareTo(x.LimitNum));
+        //                break;
+        //        }
+        //    }
+        //}
         public void SortNum(SortBy sortBy)
         {
             if (rezultGame != null && rezultGame.Count > 0)
             {
-                switch (sortBy)
-                {
-                    case SortBy.stepCountNum:
-                        rezultGame.Sort((x, y) => y.StepСountNum.CompareTo(x.StepСountNum));
-                        break;
-                    case SortBy.limitNum:
-                        rezultGame.Sort((x, y) => y.LimitNum.CompareTo(x.LimitNum));
-                        break;
+                if (rezultGame != null && rezultGame.Count > 0)
+                { 
+                    switch (sortBy)
+                    {
+                        case SortBy.stepCountNum:
+                            rezultGame = rezultGame.OrderByDescending(x => x.StepСountNum).ToList();
+                            break;
+                        case SortBy.limitNum:
+                            rezultGame = rezultGame.OrderByDescending(x => x.LimitNum).ToList();
+                            break;
+                    }
                 }
             }
         }
