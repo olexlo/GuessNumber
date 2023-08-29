@@ -149,6 +149,24 @@ namespace GuessNumber
                 flNumRecord = false;
                 stepCountNum = 1;
                 numOfBenefits = 0;
+                switch (limitNum)
+                {
+                    case 10:
+                        BiggerSmaller.IsEnabled = true;
+                        break;
+                    case 100:
+                        BiggerSmaller.IsEnabled = true;
+                        AccidentallyCrop.IsEnabled = true;
+                        break;
+                    case 1000:
+                        BiggerSmaller.IsEnabled = true;
+                        AccidentallyCrop.IsEnabled = true;
+                        PrimeNumber.IsEnabled = true;
+                        MultipleOfThree.IsEnabled = true;
+                        break;
+                    default:
+                        break;
+                }
             }
             else 
             {
@@ -157,32 +175,18 @@ namespace GuessNumber
                 BeginToPlay.Content = "Грати";
                 BeginToPlay.IsEnabled = false;
                 ClickAndGuess.IsEnabled = false;
-                PlayingField.Text = "0";
+                PlayingField.Text = "";
                 RangeTen.IsEnabled = true;
                 RangeHundred.IsEnabled = true;
                 RangeThousand.IsEnabled = true;
                 BiggerSmaller.IsEnabled = false;
+                LabelBiggerSmaller.Content = "";
                 AccidentallyCrop.IsEnabled = false;
+                LabelAccidentallyCrop.Content = "";
                 PrimeNumber.IsEnabled = false;
+                LabelPrimeNumber.Content = "";
                 MultipleOfThree.IsEnabled = false;
-            }
-            switch (limitNum)
-            {
-                case 10:
-                    BiggerSmaller.IsEnabled = true;
-                    break;
-                case 100:
-                    BiggerSmaller.IsEnabled = true;
-                    AccidentallyCrop.IsEnabled = true;
-                    break;
-                case 1000:
-                    BiggerSmaller.IsEnabled = true;
-                    AccidentallyCrop.IsEnabled = true;
-                    PrimeNumber.IsEnabled = true;
-                    MultipleOfThree.IsEnabled = true;
-                    break;
-                default:
-                    break;
+                LabelMultipleOfThree.Content = "";
             }
         }
 
