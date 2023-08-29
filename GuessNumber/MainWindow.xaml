@@ -26,10 +26,10 @@
         <Label x:Name="LabelMultipleOfThree" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="32" Margin="0,222,0,0" VerticalAlignment="Top" Width="148"/>
         <Button x:Name="BiggerSmaller" Grid.Column="1" Content="Більш-менш" IsEnabled="False" HorizontalAlignment="Left" Height="30" Margin="0,328,0,0" VerticalAlignment="Top" Width="148" Click="BiggerSmaller_Click"/>
         <Label x:Name="LabelBiggerSmaller" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="39" Margin="0,289,0,0" VerticalAlignment="Top" Width="148"/>
-        <Label x:Name="FieldOfHistory" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="263" Margin="153,95,0,0" VerticalAlignment="Top" Width="241"/>
         <Button x:Name="DifficultyRecordTable" Grid.Column="1" Content="Таблиця рекордів за рівнем складності" IsEnabled="False" HorizontalAlignment="Left" Height="32" Margin="473,20,0,0" VerticalAlignment="Top" Width="231" Click="DifficultyRecordTable_Click"/>
         <Button x:Name="HintsRecordsTable" Grid.Column="1" Content="Таблиця рекордів за кількістью спроб" IsEnabled="False" HorizontalAlignment="Left" Height="33" Margin="473,57,0,0" VerticalAlignment="Top" Width="231" Click="HintsRecordsTable_Click"/>
         <Label x:Name="ListOfRecords" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="473,102,0,0" VerticalAlignment="Top" Height="256" Width="231"/>
+        <TextBox x:Name="FieldOfHistory" Grid.Column="1" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="263" Margin="153,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="234"/>
 
     </Grid>
 </Window>

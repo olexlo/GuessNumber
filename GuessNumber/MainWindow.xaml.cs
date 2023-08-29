@@ -141,7 +141,7 @@ namespace GuessNumber
                 InformationTable.Content = "Вгадай число в диапазоне від 0 до " + limitNum.ToString() + ".";
                 if (flNumRecord) ListOfRecords.Content = "ID  Діапазон  Шукане  Спроб  Допомоги \n";
                 BeginToPlay.Content = "Здатися";
-                FieldOfHistory.Content = "";
+                FieldOfHistory.Text = "";
                 RangeTen.IsEnabled = false;
                 RangeHundred.IsEnabled = false;
                 RangeThousand.IsEnabled = false;
@@ -192,7 +192,7 @@ namespace GuessNumber
             if (treasure == hiddenNum) 
             {
                 InformationTable.Content = " ПЕРЕМОГА. Загадане число це => " + hiddenNum.ToString();
-                FieldOfHistory.Content += $"{treasure} ПЕРЕМОГА. \n";
+                FieldOfHistory.Text += $"{treasure} ПЕРЕМОГА. \n";
                 BeginToPlay.Content = "Грати";
                 BeginToPlay.IsEnabled = false;
                 ClickAndGuess.IsEnabled = false;
@@ -214,7 +214,7 @@ namespace GuessNumber
             else 
             {
                 InformationTable.Content = " НЕВДАЧА. Спробуй ще раз";
-                FieldOfHistory.Content += $"{treasure} НЕВДАЧА. \n";
+                FieldOfHistory.Text += $"{treasure} НЕВДАЧА. \n";
                 stepCountNum++;
             }
             PlayingField.Text = "";
