@@ -70,20 +70,28 @@ namespace GuessNumber
 
         private void BiggerSmaller_Click(object sender, RoutedEventArgs e)
         {
-            if (int.Parse(PlayingField.Text) > hiddenNum) 
+            int number;
+            if (int.TryParse(PlayingField.Text, out number))
             {
-                LabelBiggerSmaller.Content = "Меньше";
+                if (int.Parse(PlayingField.Text) > hiddenNum)
+                {
+                    LabelBiggerSmaller.Content = "Меньше";
+                }
+                if (int.Parse(PlayingField.Text) < hiddenNum)
+                {
+                    LabelBiggerSmaller.Content = "Більше";
+                }
+                if (int.Parse(PlayingField.Text) == hiddenNum)
+                {
+                    LabelBiggerSmaller.Content = "Вгадал";
+                }
+                BiggerSmaller.IsEnabled = false;
+                numOfBenefits++;
             }
-            if (int.Parse(PlayingField.Text) < hiddenNum)
+            else 
             {
-                LabelBiggerSmaller.Content = "Більше";
+                LabelBiggerSmaller.Content = "Вкажіть число";
             }
-            if (int.Parse(PlayingField.Text) == hiddenNum)
-            {
-                LabelBiggerSmaller.Content = "Вгадал";
-            }
-            BiggerSmaller.IsEnabled = false;
-            numOfBenefits++;
         }
 
         private void MultipleOfThree_Click(object sender, RoutedEventArgs e)
